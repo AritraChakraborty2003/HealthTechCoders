@@ -6,8 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login
 from django.contrib.auth import logout as logouts
 from django.contrib.auth.decorators import login_required
-from home.models import Contact,Patient,Doctor
-
+from home.models import Contact,Patient,Doctor,patAmbulance,ambulances as am,regAmbulances
 from django.core.mail import send_mail
 # Create your views here.
 @login_required(login_url="login")
@@ -96,8 +95,14 @@ def patDetails(request):
         sex=request.POST.get("sex")
         patId=request.POST.get("patId")
         medHist=request.POST.get("MedHistory")
+        area=request.POST.get("area")
+        city=request.POST.get("city")
         Patient1=Patient(name=uname,age=age,email=email,sex=sex,patId=patId,history=medHist)
         Patient1.save()
+
+        pat=patAmbulance(patId=patId,name=uname,age=age,email=email,sex=sex,area=area,city=city)
+        pat.save()
+
         messages.success(request,"You message added successfully")
 
      return render(request,"pat.html")
@@ -206,3 +211,39 @@ def changeDoc(request):
         return redirect("index")
     else:
         return render(request,"changeDoc.html",data)
+def ambulance(request):
+    lst=[0]
+    if request.method=="POST":
+        patId=request.POST.get("patId")
+        name=request.POST.get("name")
+        data=regAmbulances.objects.filter(pat_id=patId,name=name).values_list("driver_name","phone_number","current","area")
+        dname=data[0][0]
+        pnum=data[0][1]
+        current=data[0][2]
+        area=data[0][3]
+        kst=[1]
+        return render(request,"ambulance.html",{'dname':dname,"pnum":pnum,"current":current,"area":area})
+    return render(request,"ambulance.html",{"dname":"fetch","pnum":"fetch","current":"fetch","area":"fetch"})
+def emergency(request):
+    if request.method=="POST":
+        name=request.POST.get("uname")
+        patId=request.POST.get("patId")
+        data=patAmbulance.objects.filter(name=name).values_list("area","city")
+        area=data[0][0]
+        city=data[0][1]
+        print(area)
+        amb_data=am.objects.filter(city=city,status="free",area=area).values_list("driver_name","ambulance_number","number")
+        dst=[]
+        for x in amb_data[0]:
+            dst.append(x)
+        regData=regAmbulances(pat_id=patId,name=name,area=area,city=city,driver_name=dst[0],phone_number=dst[2],current="to be fetched")
+        regData.save()
+        msg="Emergency Health Condition ambulance is sent driver name "+dst[0]+" ambulance number "+dst[1]+" phone no is "+dst[2]+" current location is "+ "to be fetched"
+        send_mail(
+            "Emergency",
+            msg,
+            settings.EMAIL_HOST_USER,
+            ["aritra.chakraborty203@gmail.com"]
+        )
+        return redirect("/dashboard")
+    return render(request,"emergency.html")

@@ -16,5 +16,7 @@ urlpatterns = [
     path("apptDoc",views.appointedDoctor,name="appointed"),
     path("patLog",views.patLog,name="patientLog"),
     path('changeLog',views.changeLog,name="change"),
-    path("changeDoc",views.changeDoc,name="changeDoc")
+    path("changeDoc",views.changeDoc,name="changeDoc"),
+    path("ambulanceSystem",views.ambulance,name="ambulance"),
+    path("emergency",views.emergency,name="emergency")
 ]

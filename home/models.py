@@ -30,3 +30,30 @@ class medicine(models.Model):
     email=models.TextField()
     medicine=models.TextField()
     message=models.TextField()
+
+class patAmbulance(models.Model):
+    patId=models.TextField()
+    name=models.TextField()
+    age=models.IntegerField()
+    email=models.TextField()
+    sex=models.TextField()
+    area=models.TextField()
+    city=models.TextField()
+
+   
+class ambulances(models.Model):
+    driver_name=models.TextField()
+    ambulance_number=models.TextField()
+    number=models.TextField()
+    area=models.TextField()
+    city=models.TextField()
+    status=models.TextField()
+
+class regAmbulances(models.Model):
+    pat_id=models.TextField()
+    name=models.TextField()
+    area=models.TextField()
+    city=models.TextField()
+    driver_name=models.TextField()
+    phone_number=models.TextField()
+    current=models.TextField()

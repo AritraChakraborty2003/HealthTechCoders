@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <div class="formClass">
+        <p style="margin-top: 3vmin; margin-left: 3vmin; color: rgb(8, 80, 195); font-size: 5vmin; font-weight: bold; text-align:center">Enter Emergency Details</p>
+    </div>
+    <div class="formClass1">
+    <form method="post">
+    {% csrf_token %} 
+        <input type="text" name="uname" id="name" placeholder="Enter Name...."  style="width:70vmin;padding:1vmin">
+       <br>
+       <br>
+        <input type="text" name="patId" id="patId" placeholder="Enter Patient Id...." style="width:70vmin; padding:1vmin">
+        <br>
+      
+        
+        <div class="btnHolder" style="display: flex; justify-content: space-evenly; margin-top: 5vmin;">
+        <button type="submit" name="submit">Submit</button>
+     
+        
+    </div>
+  
+    
+    </form>
+</div>
+</body>
+</html>
+<style>
+  .formClass{
+      display:flex;
+      justify-content:center
+  }
+  .formClass1{
+    display:flex;
+      justify-content:center
+  }
+</style>
