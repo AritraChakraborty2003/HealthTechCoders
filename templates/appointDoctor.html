@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <p style="margin-top:7vmin;color:black; font-size:9vmin; text-align:center">Doctor Details</p>
+    <div class="container" style="display:flex; flex-wrap:wrap; justify-content:center">
+        <div class="box1" style="display:flex; justify-content:center; width:100vmin;">
+            <div class="cont" style="height:60vmin;width:80vmin;display:flex;justify-content:center; align-items:center">
+                <div class="imgHolder" style="height:40vmin; width:60vmin; ">
+                    <img src="static/doc1.webp" style="max-width:100%; object-fit:contain">
+                </div>
+            </div>
+        </div>
+        <div class="box2" style="width:100vmin;">
+            <div class="cont" style="height:60vmin;width:80vmin;display:flex; justify-content:center; align-items:center">
+                <div class="cont" style="height:50vmin;width:80vmin;  padding:3vmin">
+                        <p style="font-size:4vmin"><b>Name:</b> {{NameDetails.0}}</p>
+                        <p style="font-size:4vmin; margin-top:3vmin"><b>Email:</b> {{emailDetails.0}}</p>
+                        <p style="font-size:4vmin;  margin-top:3vmin"><b>Degree:</b> {{DegreeDetails.0}}</p>
+                        <p style="font-size:4vmin;  margin-top:3vmin"><b>Speciality:</b> {{SpecialistDetails.0}}</p>
+                        <p style="font-size:4vmin;  margin-top:3vmin"><b>Extra Appointment Time:</b> 8.30am-11.30am Monday and 10.30 to 12.00pm Saturday</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="btnHolder" style="display:flex;justify-content:center">
+        <button style="background-color:black; padding:1vmin; font-size:3.5vmin"><a href="/" style="color:white">Back</a></button>
+    </div>
+</body>
+</html>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
+</style>

@@ -1,0 +1,91 @@
+{% if messages %}
+    <ul class="messages" style="background-color: lightyellow;font-size: 3.5vmin;">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+<div class="back" style="height: 100vh;width: 100vw;">
+    
+    
+    <div class="formClass">
+        <p style="margin-top: 3vmin; margin-left: 3vmin; color: rgb(8, 80, 195); font-size: 5vmin; font-weight: bold; text-align:center">Enter Patient Details</p>
+        
+    <form method="post">
+    {% csrf_token %} 
+        <input type="text" name="uname" id="name" placeholder="Enter Name....">
+        <input type="number" name="age" id="age" placeholder="Enter age....">
+        <input type="text" name="email" id="email" placeholder="Enter email...."> 
+        <input type="text" name="sex" id="sex" placeholder="Enter sex....">
+        <input type="text" name="patId" id="patId" placeholder="Enter Patient Id....">
+        <textarea style="margin-top:4vmin; margin-left:5vmin; padding:2vmin; border-radius:2vmin" rows="5" cols="62" name="MedHistory" id="Med History" placeholder="Enter Medical History..."></textarea>
+      
+        
+        <div class="btnHolder" style="display: flex; justify-content: space-evenly; margin-top: 5vmin;">
+        <button type="submit" name="submit">Submit</button>
+        <a href="patLog" style="margin-top:3vmin">Appointed Doctor</button>
+        <a href="changeLog" style="margin-top:3vmin">Change Doctor</button>
+        
+    </div>
+  
+    
+    </form>
+    
+    </div>
+    </div>
+    </body>
+    
+    </html>            
+    
+    
+    <style>
+    
+        *{
+            margin:0;
+            padding: 0;
+        }
+        .back{
+            background-image: url("static/images/ayushImage.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .formClass{
+            
+            height: 80vmin; width: 80vmin;
+            border-radius: 5vmin;
+            opacity: 0.87;
+            background-color: white;
+          
+        }
+        input{
+            width: 30vmin;
+            padding: 2vmin;
+            margin-top: 7vmin;
+            border-radius: 2vmin;
+            margin-left: 5vmin;
+        }
+        button{
+            padding: 2vmin;
+            border-radius:3vmin;
+            font-size: 2vmin;
+            letter-spacing: 0.45vmin;
+        }
+        button:hover{
+            background-color: rgb(20, 94, 223);
+            color: white;
+        }
+        .formClass{
+            border: 1px solid black;
+        }
+        .back{
+            background-image: url("static/doctor1.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: fixed;
+        }
+      
+    </style>
