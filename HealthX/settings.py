@@ -131,3 +131,9 @@ EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=587 
 EMAIL_HOST_USER='aritra.chakraborty2023@gmail.com' 
 EMAIL_HOST_PASSWORD='ohfrcqmbhafemvth' 
+STATIC_URL = '/static/'
+STATICFILES_DIRS=[
+    BASE_DIR,"static"
+]
+MEDIA_URL="/media/"
+MEDIA_ROOT=os.path.join(BASE_DIR,"media/")

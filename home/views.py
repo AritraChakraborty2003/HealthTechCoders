@@ -2,7 +2,14 @@ from django.conf import settings
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.shortcuts import redirect,HttpResponse
+from skimage.metrics import structural_similarity
+import imutils
+import cv2
+from PIL import Image
+import requests
 from django.contrib import messages
+from home.models import ImageDB
+from .forms import ImageForm
 from django.contrib.auth import authenticate,login
 from django.contrib.auth import logout as logouts
 from django.contrib.auth.decorators import login_required
@@ -84,7 +91,7 @@ def signup(request):
         else:
             user=User.objects.create_user(uname,email,password)
             user.save()
-            return redirect("login")
+            return redirect("/docVerify")
 
     return render(request,"signup.html")
 def patDetails(request):
@@ -247,3 +254,37 @@ def emergency(request):
         )
         return redirect("/dashboard")
     return render(request,"emergency.html")
+def docVerify(request):
+    form=ImageForm(request.POST,request.FILES)
+    if form.is_valid():
+     messages.success(request, "Image uploaded successfully...")
+     form.save()
+     return redirect("/verification")
+    form=ImageForm()
+    return render(request,"doc_verification.html",{'form':form})   
+def verification(request):
+   original=Image.open(settings.MEDIA_ROOT+"original.png")
+   image=ImageDB.objects.all()
+   img_val=""
+   n=len(image)
+   x=image[n-1]
+   img_val=x.photo.url[6:]
+   entered_image=Image.open(settings.MEDIA_ROOT+img_val)
+   original=cv2.imread(settings.MEDIA_ROOT+"original.png")
+   tampered=cv2.imread(settings.MEDIA_ROOT+img_val)
+   original_grayscale=cv2.cvtColor(original,cv2.COLOR_BGR2GRAY)
+   tampered_grayscale=cv2.cvtColor(tampered,cv2.COLOR_BGR2GRAY)
+   (score,diff) = structural_similarity(original_grayscale,tampered_grayscale,full=True)
+   diff=(diff*255).astype("uint8")
+   if(score>0.5): 
+      val="Document Verified Successfully"
+   else:
+      val="Document not Verified seems to be Tampered"  
+   if request.method=="POST":
+      if  score>0.5:
+       return redirect("/login")
+      else:
+         return redirect("/docVerify")
+
+
+   return render(request,"verification.html",{"value":val})

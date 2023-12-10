@@ -57,3 +57,6 @@ class regAmbulances(models.Model):
     driver_name=models.TextField()
     phone_number=models.TextField()
     current=models.TextField()
+
+class ImageDB(models.Model):
+   photo=models.FileField(upload_to="media",max_length=250,null=True,default=None)
