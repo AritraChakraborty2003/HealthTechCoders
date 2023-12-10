@@ -24,12 +24,13 @@ class Doctor(models.Model):
     Degree=models.TextField()
     Specialist=models.TextField()
     email=models.TextField()
-class medicine(models.Model):
+class medicines(models.Model):
     name=models.TextField()
     patId=models.TextField()
     email=models.TextField()
     medicine=models.TextField()
     message=models.TextField()
+    price=models.IntegerField()
 
 class patAmbulance(models.Model):
     patId=models.TextField()

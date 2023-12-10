@@ -13,7 +13,7 @@ from .forms import ImageForm
 from django.contrib.auth import authenticate,login
 from django.contrib.auth import logout as logouts
 from django.contrib.auth.decorators import login_required
-from home.models import Contact,Patient,Doctor,patAmbulance,ambulances as am,regAmbulances
+from home.models import Contact,Patient,Doctor,patAmbulance,ambulances as am,regAmbulances,medicines
 from django.core.mail import send_mail
 # Create your views here.
 @login_required(login_url="login")
@@ -52,10 +52,18 @@ def medicine(request):
         name=request.POST.get("name")
         email=request.POST.get("email")
         patId=request.POST.get("patId")
-        medicine=request.POST.get("medicine")
+        medicine1=request.POST.get("medicine1")
+        medicine2=request.POST.get("medicine2")
+        medicine3=request.POST.get("medicine3")
         message=request.POST.get("message")
-        details="Patient with name "+name+" and Pat Id "+patId+"medicines are "+medicine
-        
+        price=request.POST.get("price")
+        details="Patient with name "+name+" and Pat Id "+patId+"medicines are "+ medicine1 + medicine2 + medicine3
+        med=medicines(name,email,patId,medicine1,price)
+        med1=medicines(name,email,patId,medicine2,price)
+        med2=medicines(name,email,patId,medicine3,price)
+        med.save()
+        med1.save()
+        med2.save()
         send_mail(
             message,
             details,
